@@ -1,0 +1,5 @@
+Le site recensera les nouveaux projets immobiliers à Dubai et permettra aux utilisateurs de voir les constructeur de projets (profile des constructeur) ainsi que les projets qu'ils ont faits, avec une évaluation globale et des remarques (comme tripadvisor). 
+
+Un comparateur sera disponible entre plusieurs projets, ce qui permet aux utilisateurs de se faire une meilleure idée de ce qu'ils regardent. (Comparaison des différentes propriétés des projets).
+
+Les utilisateurs pourront ajouter des projets en favorit ainsi que des constructeur.
