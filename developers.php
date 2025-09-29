@@ -1,12 +1,9 @@
 <?php
   session_start();
-  require('functions.php');
+  require('functionsDEV.php');
   $dev = feedTableau();
 
   $langue_dispo = array('en','fr');
-
-  var_dump(date(null, null));
-  var_dump($_GET);
 
   $_SESSION['langue'] = 'fr'; 
   $address = filter_input(INPUT_GET, 'address', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -18,7 +15,6 @@
     $validParam = False;
     if(isset($_GET["$paramName"]) && $_GET["$paramName"] != '') {
       return true;
-      echo('VALIDER');
     } else {
       return False;
     }
@@ -43,7 +39,6 @@
     if(checkParam('regDate')) {
       $unixTime = strtotime($regDate);
       $dateAChercher = date('d/m/Y', $unixTime);
-      var_dump($dateAChercher);
       $dev = filterDevelopers($dev, 'regDate', $dateAChercher);
     }
     if(checkParam('licenseNum')) {
@@ -80,28 +75,45 @@
     </header>
 
     <main>
-      <table>
-        <tr>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Registration Date</th>
-          <th>License number</th>
-        </tr>
-        <?php 
-        showDevelopers($dev);
-        ?>
-      </table>
+      <div class="slideshow-container">
+            <div class="slideshow-title">
+                <h2><?php echo $lang['DEV_TITLE'];?></h2>
+            </div>
+            <div class="slideshow-content">
+                <img src="https://limeswood.ae/wp-content/uploads/2023/01/6.jpg" alt="">
+            </div>
+            <div class="slideshow-content">
+                <img src="https://limeswood.ae/wp-content/uploads/2023/01/5.jpg" alt="">
+            </div>
+            <div class="slideshow-content">
+                <img src="https://limeswood.ae/wp-content/uploads/2023/01/2.jpg" alt="">
+            </div>
+        </div>  
+      <section>
+        <form class="lux-form" action="" method="GET">
+          <input type="text" name="langue" value="<?php echo($_SESSION['langue']); ?>" hidden>
+          <input type="text" name="name" placeholder="Nom">
+          <input type="date" name="regDate">
+          <input type="number" name="licenseNum" step="1" placeholder="Numéro de licence">
+          <input type="text" name="webpage" placeholder="Website">
+          
+          <input type="submit" name="valider" value="Envoyer">
+          <input type="reset" value="Effacer les filtres" onclick="window.location.href=window.location.pathname;">
 
-      <form action="" method="GET">
-        <input type="text" name="langue" id="" value="<?php echo($_SESSION['langue']); ?>" hidden>
-        <input type="text" name="name" id="">
-        <input type="text" name="address" id="">
-        <input type="date" name="regDate" id="">
-        <input type="number" name="licenseNum" id="" step=1>
-        <input type="submit" name="valider" id="" value="envoyer">
-        <input type="reset" name="Reset" id="" value="Reset">
-      </form>
+        </form>
+        <table class="table">
+          <tr>
+            <th>Name</th>
+            
+            <th>Registration Date</th>
+            <th>License number</th>
+            <th>Website</th>
+          </tr>
+          <?php 
+          showDevelopers($dev);
+          ?>
+        </table>
+      </section>
     </main>
-    
 </body>
 </html>
