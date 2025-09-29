@@ -32,8 +32,10 @@
         </nav>
         <h1><?php echo $lang['MAINPAGE_TITLE'];?></h1>
         <div>
-            <a href="./?langue=fr">Francais</a>
-            <a href="./?langue=en">English</a>
+          <form action="" method="GET">
+            <button type="submit" name="langue" value="fr">Français</button>
+            <button type="submit" name="langue" value="en">English</button>
+          </form>
         </div>
         
     </header>
