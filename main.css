@@ -61,17 +61,51 @@ h1 {
 .presentation {
     display: flex;
     flex-direction: row;
-    align-items: center;    
+    align-items: center;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    margin: 5%;
+    margin-top: 0%;
+    padding: 5% 0;
+    gap: 5%;
+}
+
+.presentation div {
+    width: 70%;
+    padding: 5%;
+    padding-top: 0px;
+}
+
+.presentation h2 {
+    font-size: xx-large;
+    font-weight: 100;
+    margin-bottom: -10px;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 0;
+    text-align: left;
+    color: black;
+    border-left: 4px solid black;
+    padding-left: 10px;
+    margin-left: 0px;
+    margin-bottom: 30px;
+
 }
 
 .presentation p {
     color: black;
     font-size: x-large;
+    line-height: 1.6;
+    text-align: justify;
+    margin-top: -15px;
+    font-weight: 100;
+    letter-spacing: 0.5px;
+    word-spacing: 1px;
 }
 
 .presentation img {
     max-width: 40%;
-    margin-left: 5%;
 }
 
 
@@ -123,4 +157,23 @@ footer {
     display: flex;
     flex-direction: column;
     padding: 35px;
+}
+
+
+.slideshow-title {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+}
+
+.slideshow-title h2 {
+    color: white;
+    font-size: 3em;
+    font-style: italic;
+    font-weight: 100;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
