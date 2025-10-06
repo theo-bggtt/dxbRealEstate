@@ -11,6 +11,7 @@
   $regDate = filter_input(INPUT_GET, 'regDate', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $licenseNum =filter_input(INPUT_GET, 'licenseNum', FILTER_VALIDATE_INT);
   $website = filter_input(INPUT_GET, 'website', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+  $params = [];
   
   function checkParam($paramName) {
     $validParam = False;
@@ -21,7 +22,6 @@
     }
   }
   
-  
   if(checkParam('langue') === True){ 
     if(in_array($_GET['langue'], $langue_dispo))
     {       
@@ -29,25 +29,26 @@
     }
   }
 
-
   if (checkParam('valider') == True) {
-    if(checkParam('address')) {
+    if(checkParam(paramName: 'address')) {
+      array_push($params, ['address', "$address"]);
       $dev = filterDevelopers($dev, 'address', $address);
     }
     if(checkParam('name')) {
-      $dev = filterDevelopers($dev, 'name', $name);
+      array_push($params, ['name', "$name"]);
     }
     if(checkParam('regDate')) {
       $unixTime = strtotime($regDate);
       $dateAChercher = date('d/m/Y', $unixTime);
-      $dev = filterDevelopers($dev, 'regDate', $dateAChercher);
+      array_push($params, ['regDate', "$dateAChercher"]);
     }
     if(checkParam('licenseNum')) {
-      $dev = filterDevelopers($dev, 'licenseNum', $licenseNum);      
+      array_push($params, ['licenseNum', "$licenseNum"]);     
     }
     if(checkParam('website')) {
-      $dev = filterDevelopers($dev, 'website', $website);      
+      array_push($params, ['website', "$website"]);   
     }
+    $dev = filterDevelopers($dev, $params);
   }
 
   include('locale/'.$_SESSION['langue'].'.php');

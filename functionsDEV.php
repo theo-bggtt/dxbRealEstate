@@ -2,43 +2,46 @@
 
 
 function feedTableau() {
-    $json = file_get_contents('csvjson.json');
-    $tableau = extractDevelopers($json);
-    return $tableau;
-}
+    $dsn = "mysql:host=localhost;dbname=dxbRealEstate;charset=utf8mb4";
+    $pdo = new PDO($dsn, 'promoter', 'oZg1lR3uq0EFTB]z');
 
-function extractDevelopers($jsonString) {
-    $data = json_decode($jsonString, true);
+    $sql = "SELECT DEVELOPER_EN AS name, REGISTRATION_DATE AS regDate, LICENSE_NUMBER AS licenseNum, WEBPAGE AS website FROM developers";
 
-    $result = [];
-
-    foreach ($data as $developer) {
-        $result[] = (object) [
-            'name'       => $developer['DEVELOPER_EN'],
-            'regDate'    => $developer['REGISTRATION_DATE'],
-            'licenseNum' => $developer['LICENSE_NUMBER'],
-            'website'    => $developer['WEBPAGE'],
-        ];
-    }
-
+    $statement = $pdo->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
 
 
-function filterDevelopers($dev, $filterName, $filterValue) {
-    foreach ($dev as $clef => $valeur) {
-        foreach($dev[$clef] as $nomChamp => $valeurChamp) {
-            if (strtoupper($nomChamp) == strtoupper($filterName) && ($nomChamp == 'name' || $nomChamp == 'address' || $nomChamp == 'regDate' || $nomChamp == 'website') && !str_contains(strtoupper($valeurChamp), strtoupper($filterValue))) {
-                unset($dev[$clef]);
-                array_values($dev);
-            } else if (strtoupper($nomChamp) == strtoupper($filterName) && strtoupper($nomChamp) == strtoupper('licenseNum') && strtoupper($valeurChamp) != strtoupper($filterValue)) {
-                unset($dev[$clef]);
-                array_values($dev);
+function filterDevelopers($dev, $params) {
+    foreach ($dev as $key => $developer) {
+        foreach ($params as [$filterName, $filterValue]) {
+            $matchFound = false;
+            foreach ($developer as $fieldName => $fieldValue) {
+                if (strtoupper($fieldName) == strtoupper($filterName)) {
+                    if (in_array(strtolower($fieldName), ['name', 'address', 'regdate', 'website'])) {
+                        if (str_contains(strtoupper($fieldValue), strtoupper($filterValue))) {
+                            $matchFound = true;
+                            break;
+                        }
+                    } elseif (strtoupper($fieldName) == 'LICENSENUM') {
+                        if (strtoupper($fieldValue) == strtoupper($filterValue)) {
+                            $matchFound = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!$matchFound) {
+                unset($dev[$key]);
+                break;
             }
         }
     }
-    return $dev;
+    return array_values($dev);
 }
+
 
 function showDevelopers($dev) {
 
