@@ -1,0 +1,69 @@
+{
+  "nom": "Arthouse Residences Tower A",
+  "developpeur": "Aviaan",
+  "localisation": {
+    "quartier": "Meydan, Nad Al Sheba 1"
+  },
+  "statut": "En construction",
+  "date_de_livraison_estimee": "Q4 2027",
+  "configuration": {
+    "types_unites": [
+      "Appartement 1 chambre",
+      "Appartement 2 chambres",
+      "Appartement 3 chambres"
+    ],
+    "surface_unites_m2": {
+      "Appartement 1 chambre": {
+        "min": 60,
+        "max": 120
+      },
+      "Appartement 2 chambres": {
+        "min": 120,
+        "max": 180
+      },
+      "Appartement 3 chambres": {
+        "min": 180,
+        "max": 240
+      }
+    },
+    "nombre_unites": 92,
+    "nombre_etages": 10,
+    "nombre_tours": 1,
+    "hauteur_plafond_m": 3.2
+  },
+  "prix_de_depart_aed": {
+    "Appartement 1 chambre": 1200000,
+    "Appartement 2 chambres": 1800000,
+    "Appartement 3 chambres": 2400000
+  },
+  "vue": "Vue sur la communauté",
+  "amenities": [
+    "Piscine à débordement",
+    "Salle de sport moderne",
+    "Studio de yoga",
+    "Lobby designé",
+    "Espaces de coworking",
+    "Sécurité 24/7",
+    "Concierge",
+    "Parking privé"
+  ],
+  "plan_de_paiement": {
+    "options": [
+      {
+        "type": "standard",
+        "booking": "10%",
+        "construction": "40%",
+        "handover": "50%",
+        "post_handover": "Non disponible"
+      },
+      {
+        "type": "post_handover",
+        "booking": "10%",
+        "construction": "40%",
+        "handover": "50%",
+        "post_handover": "Non disponible"
+      }
+    ]
+  },
+  "source": "https://new-projects.ae/meydan-dubai/arthouse-residences-tower"
+}

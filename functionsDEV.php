@@ -17,7 +17,7 @@ function extractDevelopers($jsonString) {
             'name'       => $developer['DEVELOPER_EN'],
             'regDate'    => $developer['REGISTRATION_DATE'],
             'licenseNum' => $developer['LICENSE_NUMBER'],
-            'webpage'    => $developer['WEBPAGE'],
+            'website'    => $developer['WEBPAGE'],
         ];
     }
 
@@ -28,7 +28,7 @@ function extractDevelopers($jsonString) {
 function filterDevelopers($dev, $filterName, $filterValue) {
     foreach ($dev as $clef => $valeur) {
         foreach($dev[$clef] as $nomChamp => $valeurChamp) {
-            if (strtoupper($nomChamp) == strtoupper($filterName) && ($nomChamp == 'name' || $nomChamp == 'address' || $nomChamp == 'regDate') && !str_contains(strtoupper($valeurChamp), strtoupper($filterValue))) {
+            if (strtoupper($nomChamp) == strtoupper($filterName) && ($nomChamp == 'name' || $nomChamp == 'address' || $nomChamp == 'regDate' || $nomChamp == 'website') && !str_contains(strtoupper($valeurChamp), strtoupper($filterValue))) {
                 unset($dev[$clef]);
                 array_values($dev);
             } else if (strtoupper($nomChamp) == strtoupper($filterName) && strtoupper($nomChamp) == strtoupper('licenseNum') && strtoupper($valeurChamp) != strtoupper($filterValue)) {

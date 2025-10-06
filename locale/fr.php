@@ -1,7 +1,9 @@
 <?php 
   // Titre de pages
   $lang['MAINPAGE_TITLE'] = 'Accueil';
-  $lang['DEV_TITLE'] = 'Developers';
+  $lang['NAV_DEV_TITLE'] = 'Developpeurs';
+  $lang['NAV_PROJECTS_TITLE'] = 'Projets';
+  $lang['NAV_CONTACT_TITLE'] = 'Contact';
 
   // Page principale
   $lang['THE_CONCEPT_TITLE'] = 'Le concept';

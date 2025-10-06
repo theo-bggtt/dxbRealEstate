@@ -10,6 +10,7 @@
   $name = filter_input(INPUT_GET, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $regDate = filter_input(INPUT_GET, 'regDate', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   $licenseNum =filter_input(INPUT_GET, 'licenseNum', FILTER_VALIDATE_INT);
+  $website = filter_input(INPUT_GET, 'website', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
   
   function checkParam($paramName) {
     $validParam = False;
@@ -44,6 +45,9 @@
     if(checkParam('licenseNum')) {
       $dev = filterDevelopers($dev, 'licenseNum', $licenseNum);      
     }
+    if(checkParam('website')) {
+      $dev = filterDevelopers($dev, 'website', $website);      
+    }
   }
 
   include('locale/'.$_SESSION['langue'].'.php');
@@ -59,19 +63,7 @@
 </head>
 <body>
     <header>
-        <nav>
-            <a href="index.php"><?php echo $lang['MAINPAGE_TITLE'];?></a>
-            <a href="developers.php">Dev</a>
-            <a href="projects.php">Projets</a>
-            <a href="contact.php">Contact</a>
-        </nav>
-        <h1><?php echo $lang['MAINPAGE_TITLE'];?></h1>
-        <div>
-          <form action="" method="GET">
-            <button type="submit" name="langue" value="fr">Français</button>
-            <button type="submit" name="langue" value="en">English</button>
-          </form>
-        </div>    
+        <?php require('header.php') ?>
     </header>
 
     <main>
@@ -92,10 +84,10 @@
       <section>
         <form class="lux-form" action="" method="GET">
           <input type="text" name="langue" value="<?php echo($_SESSION['langue']); ?>" hidden>
-          <input type="text" name="name" placeholder="Nom">
-          <input type="date" name="regDate">
-          <input type="number" name="licenseNum" step="1" placeholder="Numéro de licence">
-          <input type="text" name="webpage" placeholder="Website">
+          <input type="text" name="name" placeholder="Nom" value="<?php echo($name);?>">
+          <input type="date" name="regDate" value="<?php echo($regDate);?>">
+          <input type="number" name="licenseNum" step="1" placeholder="Numéro de licence" value="<?php echo($licenseNum);?>">
+          <input type="text" name="website" placeholder="Website" value="<?php echo($website);?>">
           
           <input type="submit" name="valider" value="Envoyer">
           <input type="reset" value="Effacer les filtres" onclick="window.location.href=window.location.pathname;">
