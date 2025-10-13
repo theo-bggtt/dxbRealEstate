@@ -88,10 +88,12 @@ function filterProjects($dev, $params)
         foreach ($params as [$filterName, $filterValue]) {
             $matchFound = false;
             foreach ($developer as $fieldName => $fieldValue) {
-                if (strtoupper($fieldName) == strtoupper($filterName) ||
+                if (
+                    strtoupper($fieldName) == strtoupper($filterName) ||
                     (strtoupper($filterName) == 'PROJECTNUM' && strtoupper($fieldName) == 'PROJECT_NUMBER') ||
                     (strtoupper($filterName) == 'NAME' && strtoupper($fieldName) == 'PROJECT_EN') ||
-                    (strtoupper($filterName) == 'DEVNAME' && strtoupper($fieldName) == 'DEVELOPER_EN')) {
+                    (strtoupper($filterName) == 'DEVNAME' && strtoupper($fieldName) == 'DEVELOPER_EN')
+                ) {
                     if (strtoupper($filterName) == 'PROJECTNUM') {
                         if (strval($fieldValue) == strval($filterValue)) {
                             $matchFound = true;

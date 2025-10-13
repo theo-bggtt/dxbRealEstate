@@ -3,8 +3,8 @@
 
 <?php
 
-include("functionsDEV.php");
-importProjectsFromCSV("script/dubai_developers_projects_20251013_103522.csv");
+include("../functionsDEV.php");
+importProjectsFromCSV("projects/dubai_developers_projects_20251013_103522.csv");
 
 ?>
 <head>

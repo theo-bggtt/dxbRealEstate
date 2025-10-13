@@ -7,8 +7,8 @@ $langue_dispo = array('en', 'fr');
 
 $_SESSION['langue'] = 'fr';
 $projectNum = filter_input(INPUT_GET, 'projectNum', FILTER_VALIDATE_INT);
-$name = filter_input(INPUT_GET,'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$devName = filter_input(INPUT_GET,'devName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$name = filter_input(INPUT_GET, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$devName = filter_input(INPUT_GET, 'devName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 $params = [];
 
@@ -50,7 +50,7 @@ include('locale/' . $_SESSION['langue'] . '.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="style/main.css">
     <title><?php echo $lang['MAINPAGE_TITLE']; ?></title>
 </head>
 
@@ -76,7 +76,8 @@ include('locale/' . $_SESSION['langue'] . '.php');
         </div>
         <section>
             <form class="lux-form" action="" method="GET">
-                <input type="number" name="projectNum" step="1" placeholder="Numéro de projet"value="<?php echo ($projectNum); ?>">
+                <input type="number" name="projectNum" step="1" placeholder="Numéro de projet"
+                    value="<?php echo ($projectNum); ?>">
                 <input type="text" name="name" placeholder="Nom" value="<?php echo ($name); ?>">
                 <input type="text" name="devName" placeholder="Nom" value="<?php echo ($devName); ?>">
 
