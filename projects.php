@@ -1,11 +1,8 @@
 <?php
-session_start();
+require('start.php');
 require('functionsDEV.php');
 $projects = feedProjects();
 
-$langue_dispo = array('en', 'fr');
-
-$_SESSION['langue'] = 'fr';
 $projectNum = filter_input(INPUT_GET, 'projectNum', FILTER_VALIDATE_INT);
 $name = filter_input(INPUT_GET, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $devName = filter_input(INPUT_GET, 'devName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -22,12 +19,6 @@ function checkParam($paramName)
     }
 }
 
-if (checkParam('langue') === True) {
-    if (in_array($_GET['langue'], $langue_dispo)) {
-        $_SESSION['langue'] = $_GET['langue'];
-    }
-}
-
 if (checkParam('valider') == True) {
     if (checkParam('projectNum')) {
         array_push($params, ['projectNum', "$projectNum"]);
@@ -40,8 +31,6 @@ if (checkParam('valider') == True) {
     }
     $projects = filterProjects($projects, $params);
 }
-
-include('locale/' . $_SESSION['langue'] . '.php');
 
 ?>
 <!DOCTYPE html>
