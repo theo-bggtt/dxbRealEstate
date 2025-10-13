@@ -1,7 +1,7 @@
 <?php
   session_start();
   require('functionsDEV.php');
-  $dev = feedTableau();
+  $dev = feedDevelopers();
 
   $langue_dispo = array('en','fr');
 

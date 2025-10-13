@@ -1,0 +1,9 @@
+2025-10-13 10:35:26,665 - INFO - Fetched 103 records at skip 0
+2025-10-13 10:35:29,820 - INFO - Fetched 100 records at skip 100
+2025-10-13 10:35:33,544 - INFO - Fetched 100 records at skip 200
+2025-10-13 10:35:36,590 - INFO - Fetched 115 records at skip 300
+2025-10-13 10:35:39,051 - INFO - Fetched 100 records at skip 400
+2025-10-13 10:35:41,901 - INFO - Fetched 21 records at skip 500
+2025-10-13 10:35:44,367 - INFO - No more data to fetch
+2025-10-13 10:35:44,380 - INFO - Saved 539 records to dubai_developers_projects_20251013_103522.csv
+2025-10-13 10:35:44,382 - INFO - Found 524 unique developer-project pairs
