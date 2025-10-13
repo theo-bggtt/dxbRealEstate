@@ -1,119 +1,103 @@
 <?php
 session_start();
 require('functionsDEV.php');
-
-// Fetch all projects initially
-$projects = feedProjects();  // <-- You will need to implement this function in functionsDEV.php
+$projects = feedProjects();
 
 $langue_dispo = array('en', 'fr');
 
 $_SESSION['langue'] = 'fr';
-
-$projectNumber = filter_input(INPUT_GET, 'projectNumber', FILTER_VALIDATE_INT);
-$projectStatus = filter_input(INPUT_GET, 'projectStatus', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$startDate = filter_input(INPUT_GET, 'startDate', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$endDate = filter_input(INPUT_GET, 'endDate', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-$projectType = filter_input(INPUT_GET, 'projectType', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$projectNum = filter_input(INPUT_GET, 'projectNum', FILTER_VALIDATE_INT);
+$name = filter_input(INPUT_GET,'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+$devName = filter_input(INPUT_GET,'devName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
 $params = [];
 
-function checkParam($paramName) {
-    return isset($_GET[$paramName]) && $_GET[$paramName] !== '';
+function checkParam($paramName)
+{
+    $validParam = False;
+    if (isset($_GET["$paramName"]) && $_GET["$paramName"] != '') {
+        return true;
+    } else {
+        return False;
+    }
 }
 
-if (checkParam('langue')) {
-    if (in_array($_GET['langue'], $GLOBALS['langue_dispo'])) {
+if (checkParam('langue') === True) {
+    if (in_array($_GET['langue'], $langue_dispo)) {
         $_SESSION['langue'] = $_GET['langue'];
     }
 }
 
-if (checkParam('valider')) {
-    if (checkParam('projectNumber')) {
-        $params['PROJECT_NUMBER'] = $projectNumber;
+if (checkParam('valider') == True) {
+    if (checkParam('projectNum')) {
+        array_push($params, ['projectNum', "$projectNum"]);
     }
-    if (checkParam('projectStatus')) {
-        $params['PROJECT_STATUS'] = $projectStatus;
+    if (checkParam('name')) {
+        array_push($params, ['name', "$name"]);
     }
-    if (checkParam('startDate')) {
-        $params['START_DATE'] = $startDate;
+    if (checkParam('devName')) {
+        array_push($params, ['devName', "$devName"]);
     }
-    if (checkParam('endDate')) {
-        $params['END_DATE'] = $endDate;
-    }
-    if (checkParam('projectType')) {
-        $params['PRJ_TYPE_EN'] = $projectType;
-    }
-
-    if (!empty($params)) {
-        $projects = filterProjects($projects, $params);  // Implement filtering in functionsDEV.php
-    }
+    $projects = filterProjects($projects, $params);
 }
 
 include('locale/' . $_SESSION['langue'] . '.php');
+
 ?>
 <!DOCTYPE html>
-<html lang="<?php echo $_SESSION['langue']; ?>">
+<html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="main.css" />
-    <title><?php echo $lang['PROJECTS_TITLE']; ?></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title><?php echo $lang['MAINPAGE_TITLE']; ?></title>
 </head>
+
 <body>
     <header>
-        <?php require('header.php'); ?>
+        <?php require('header.php') ?>
     </header>
 
     <main>
+        <div class="slideshow-container">
+            <div class="slideshow-title">
+                <h2><?php echo $lang['DEV_TITLE']; ?></h2>
+            </div>
+            <div class="slideshow-content">
+                <img src="https://limeswood.ae/wp-content/uploads/2023/01/6.jpg" alt="">
+            </div>
+            <div class="slideshow-content">
+                <img src="https://limeswood.ae/wp-content/uploads/2023/01/5.jpg" alt="">
+            </div>
+            <div class="slideshow-content">
+                <img src="https://limeswood.ae/wp-content/uploads/2023/01/2.jpg" alt="">
+            </div>
+        </div>
         <section>
-            <h2><?php echo $lang['PROJECTS_TITLE']; ?></h2>
+            <form class="lux-form" action="" method="GET">
+                <input type="number" name="projectNum" step="1" placeholder="Numéro de projet"value="<?php echo ($projectNum); ?>">
+                <input type="text" name="name" placeholder="Nom" value="<?php echo ($name); ?>">
+                <input type="text" name="devName" placeholder="Nom" value="<?php echo ($devName); ?>">
 
-            <form class="lux-form" method="GET" action="">
-                <input type="hidden" name="langue" value="<?php echo $_SESSION['langue']; ?>" />
-                
-                <input type="number" name="projectNumber" placeholder="<?php echo $lang['PROJECT_NUMBER']; ?>" value="<?php echo htmlspecialchars($projectNumber); ?>" />
-                
-                <input type="text" name="projectStatus" placeholder="<?php echo $lang['PROJECT_STATUS']; ?>" value="<?php echo htmlspecialchars($projectStatus); ?>" />
-                
-                <input type="date" name="startDate" placeholder="<?php echo $lang['START_DATE']; ?>" value="<?php echo htmlspecialchars($startDate); ?>" />
-                
-                <input type="date" name="endDate" placeholder="<?php echo $lang['END_DATE']; ?>" value="<?php echo htmlspecialchars($endDate); ?>" />
-                
-                <input type="text" name="projectType" placeholder="<?php echo $lang['PROJECT_TYPE']; ?>" value="<?php echo htmlspecialchars($projectType); ?>" />
-                
-                <input type="submit" name="valider" value="<?php echo $lang['FILTER']; ?>" />
-                <input type="reset" value="<?php echo $lang['RESET']; ?>" onclick="window.location.href=window.location.pathname;" />
+                <input type="submit" name="valider" value="Envoyer">
+                <input type="reset" value="Effacer les filtres"
+                    onclick="window.location.href=window.location.pathname;">
+
             </form>
-
             <table class="table">
-                <thead>
-                    <tr>
-                        <th><?php echo $lang['PROJECT_NUMBER']; ?></th>
-                        <th><?php echo $lang['PROJECT_EN']; ?></th>
-                        <th><?php echo $lang['DEVELOPER_EN']; ?></th>
-                        <th><?php echo $lang['START_DATE']; ?></th>
-                        <th><?php echo $lang['END_DATE']; ?></th>
-                        <th><?php echo $lang['PROJECT_STATUS']; ?></th>
-                        <th><?php echo $lang['PROJECT_VALUE']; ?></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    foreach ($projects as $project) {
-                        echo "<tr>";
-                        echo "<td>" . htmlspecialchars($project['PROJECT_NUMBER']) . "</td>";
-                        echo "<td>" . htmlspecialchars($project['PROJECT_EN']) . "</td>";
-                        echo "<td>" . htmlspecialchars($project['DEVELOPER_EN']) . "</td>";
-                        echo "<td>" . htmlspecialchars($project['START_DATE']) . "</td>";
-                        echo "<td>" . htmlspecialchars($project['END_DATE']) . "</td>";
-                        echo "<td>" . htmlspecialchars($project['PROJECT_STATUS']) . "</td>";
-                        echo "<td>" . htmlspecialchars(number_format($project['PROJECT_VALUE'], 2)) . "</td>";
-                        echo "</tr>";
-                    }
-                    ?>
-                </tbody>
+                <tr>
+                    <th>Project number</th>
+
+                    <th>Project Name</th>
+                    <th>Developer Name</th>
+                </tr>
+                <?php
+                showProjects($projects);
+                ?>
             </table>
         </section>
     </main>
 </body>
+
 </html>

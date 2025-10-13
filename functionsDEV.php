@@ -1,7 +1,8 @@
 <?php
 
 
-function updateDevelopers() {
+function updateDevelopers()
+{
     $dsn = "mysql:host=localhost;dbname=dxbRealEstate;charset=utf8mb4";
     $pdo = new PDO($dsn, 'promoter', 'oZg1lR3uq0EFTB]z');
     $sql = "INSERT INTO developers (developer_number, developer_en, registration_date, license_source_en, license_type_en, legal_status_en, webpage, phone, fax, license_number, license_issue_datem license_expiry_date, chamber_of_commerce_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -11,7 +12,8 @@ function updateDevelopers() {
 }
 
 
-function importProjectsFromCSV($csvFilePath) {
+function importProjectsFromCSV($csvFilePath)
+{
     $dsn = "mysql:host=localhost;dbname=dxbRealEstate;charset=utf8mb4";
     $pdo = new PDO($dsn, 'promoter', 'oZg1lR3uq0EFTB]z');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -46,7 +48,8 @@ function importProjectsFromCSV($csvFilePath) {
     // Loop through each line of CSV and insert into database
     while (($row = fgetcsv($handle)) !== false) {
         // If the CSV row has fewer columns than headers, skip
-        if (count($row) < count($headers)) continue;
+        if (count($row) < count($headers))
+            continue;
 
         // Bind values and execute
         $stmt->execute($row);
@@ -55,10 +58,11 @@ function importProjectsFromCSV($csvFilePath) {
     fclose($handle);
 }
 
-function feedProjects() {
+function feedProjects()
+{
     $dsn = "mysql:host=localhost;dbname=dxbRealEstate;charset=utf8mb4";
     $pdo = new PDO($dsn, 'promoter', 'oZg1lR3uq0EFTB]z');
-    $sql = "SELECT PROJECT_NUMBER, PROJECT_EN, DEVELOPER_EN, START_DATE, END_DATE, PROJECT_STATUS, PROJECT_VALUE FROM projects";
+    $sql = "SELECT PROJECT_NUMBER, PROJECT_EN, DEVELOPER_EN FROM projects";
 
     $statement = $pdo->prepare($sql);
     $statement->execute();
@@ -66,7 +70,8 @@ function feedProjects() {
     return $result;
 }
 
-function feedDevelopers() {
+function feedDevelopers()
+{
     $dsn = "mysql:host=localhost;dbname=dxbRealEstate;charset=utf8mb4";
     $pdo = new PDO($dsn, 'promoter', 'oZg1lR3uq0EFTB]z');
     $sql = "SELECT DEVELOPER_EN AS name, REGISTRATION_DATE AS regDate, LICENSE_NUMBER AS licenseNum, WEBPAGE AS website FROM developers";
@@ -77,7 +82,40 @@ function feedDevelopers() {
     return $result;
 }
 
-function filterDevelopers($dev, $params) {
+function filterProjects($dev, $params)
+{
+    foreach ($dev as $key => $developer) {
+        foreach ($params as [$filterName, $filterValue]) {
+            $matchFound = false;
+            foreach ($developer as $fieldName => $fieldValue) {
+                if (strtoupper($fieldName) == strtoupper($filterName) ||
+                    (strtoupper($filterName) == 'PROJECTNUM' && strtoupper($fieldName) == 'PROJECT_NUMBER') ||
+                    (strtoupper($filterName) == 'NAME' && strtoupper($fieldName) == 'PROJECT_EN') ||
+                    (strtoupper($filterName) == 'DEVNAME' && strtoupper($fieldName) == 'DEVELOPER_EN')) {
+                    if (strtoupper($filterName) == 'PROJECTNUM') {
+                        if (strval($fieldValue) == strval($filterValue)) {
+                            $matchFound = true;
+                            break;
+                        }
+                    } else {
+                        if (str_contains(strtoupper($fieldValue), strtoupper($filterValue))) {
+                            $matchFound = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!$matchFound) {
+                unset($dev[$key]);
+                break;
+            }
+        }
+    }
+    return array_values($dev);
+}
+
+function filterDevelopers($dev, $params)
+{
     foreach ($dev as $key => $developer) {
         foreach ($params as [$filterName, $filterValue]) {
             $matchFound = false;
@@ -105,17 +143,31 @@ function filterDevelopers($dev, $params) {
     return array_values($dev);
 }
 
-
-function showDevelopers($dev) {
+function showProjects($dev)
+{
 
     foreach ($dev as $clef => $valeur) {
-        echo("<tr>");
+        echo ("<tr>");
         foreach ($dev[$clef] as $nomChamp => $valeurChamp) {
-            echo("<td> $valeurChamp </td>");
-        }
-        echo("</tr>");
-    }
+            echo ("<td>");
+            echo ("<a href='details.php?project_number=" . $dev[$clef]['PROJECT_NUMBER'] . "'> $valeurChamp </a>");
+            echo ("</td>");
 
+        }
+        echo ("</tr>");
+    }
+}
+
+function showDevelopers($dev)
+{
+
+    foreach ($dev as $clef => $valeur) {
+        echo ("<tr>");
+        foreach ($dev[$clef] as $nomChamp => $valeurChamp) {
+            echo ("<td> $valeurChamp </td>");
+        }
+        echo ("</tr>");
+    }
 }
 
 
