@@ -1,2 +1,9 @@
 .vscode/
 .tmp.driveupload/
+.tmp.drivedownload/
+.env
+.vendor
+composer.lock
+composer.lock
+composer.json
+composer.phar

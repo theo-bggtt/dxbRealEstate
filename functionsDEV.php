@@ -1,22 +1,20 @@
 <?php
 
+require_once __DIR__ . '/db.php';
 
 function updateDevelopers()
 {
-    $dsn = "mysql:host=localhost;dbname=dxbRealEstate;charset=utf8mb4";
-    $pdo = new PDO($dsn, 'promoter', 'oZg1lR3uq0EFTB]z');
-    $sql = "INSERT INTO developers (developer_number, developer_en, registration_date, license_source_en, license_type_en, legal_status_en, webpage, phone, fax, license_number, license_issue_datem license_expiry_date, chamber_of_commerce_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    $pdo = getPDO();
+    // Fixed typo: license_issue_date (was license_issue_datem)
+    // Assuming 13 fields; adjust if needed. execute() needs params, but since incomplete, left as-is.
+    $sql = "INSERT INTO developers (developer_number, developer_en, registration_date, license_source_en, license_type_en, legal_status_en, webpage, phone, fax, license_number, license_issue_date, license_expiry_date, chamber_of_commerce_no) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
     $statement = $pdo->prepare($sql);
-    $statement->execute();
-
+    $statement->execute(); // Add actual params here when implementing
 }
-
 
 function importProjectsFromCSV($csvFilePath)
 {
-    $dsn = "mysql:host=localhost;dbname=dxbRealEstate;charset=utf8mb4";
-    $pdo = new PDO($dsn, 'promoter', 'oZg1lR3uq0EFTB]z');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $pdo = getPDO();
 
     // Open CSV file for reading
     if (!file_exists($csvFilePath) || !is_readable($csvFilePath)) {
@@ -42,7 +40,6 @@ function importProjectsFromCSV($csvFilePath)
     CNT_BUILDING, CNT_VILLA, CNT_UNIT, MASTER_PROJECT_EN
 ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-
     $stmt = $pdo->prepare($sql);
 
     // Loop through each line of CSV and insert into database
@@ -60,8 +57,7 @@ function importProjectsFromCSV($csvFilePath)
 
 function feedProjects()
 {
-    $dsn = "mysql:host=localhost;dbname=dxbRealEstate;charset=utf8mb4";
-    $pdo = new PDO($dsn, 'promoter', 'oZg1lR3uq0EFTB]z');
+    $pdo = getPDO();
     $sql = "SELECT PROJECT_NUMBER, PROJECT_EN, DEVELOPER_EN FROM projects";
 
     $statement = $pdo->prepare($sql);
@@ -72,8 +68,7 @@ function feedProjects()
 
 function feedDevelopers()
 {
-    $dsn = "mysql:host=localhost;dbname=dxbRealEstate;charset=utf8mb4";
-    $pdo = new PDO($dsn, 'promoter', 'oZg1lR3uq0EFTB]z');
+    $pdo = getPDO();
     $sql = "SELECT DEVELOPER_EN AS name, REGISTRATION_DATE AS regDate, LICENSE_NUMBER AS licenseNum, WEBPAGE AS website FROM developers";
 
     $statement = $pdo->prepare($sql);
@@ -171,7 +166,5 @@ function showDevelopers($dev)
         echo ("</tr>");
     }
 }
-
-
 
 ?>
