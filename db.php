@@ -1,5 +1,6 @@
 <?php
 // db.php (place in your project root or a 'includes/' folder)
+
 require_once __DIR__ . '/vendor/autoload.php'; // Adjust if vendor is elsewhere
 
 // Load .env with error handling

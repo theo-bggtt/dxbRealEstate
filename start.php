@@ -1,5 +1,12 @@
 <?php
-
+session_set_cookie_params([
+    'lifetime' => 0,
+    'path' => '/',
+    'domain' => '', // Or your domain for subdomains
+    'secure' => true, // Only true if HTTPS is enabled
+    'httponly' => true,
+    'samesite' => 'Strict'
+]);
 session_start();
 
 $langue_dispo = array('en', 'fr');
