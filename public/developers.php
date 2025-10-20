@@ -1,6 +1,14 @@
 <?php
-require('start.php');
-require('functionsDEV.php');
+// Include initialization script
+require_once __DIR__ . '/start.php';
+
+// Include configuration and language files
+require_once __DIR__ . '/../include/config/config.php'; // BASE_URL definition
+require_once __DIR__ . '/../include/locale/' . $_SESSION['langue'] . '.php';
+
+// Include custom functions
+require_once __DIR__ . '/../include/functions/functionsDEV.php';
+
 $dev = feedDevelopers();
 
 $address = filter_input(INPUT_GET, 'address', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -10,19 +18,8 @@ $licenseNum = filter_input(INPUT_GET, 'licenseNum', FILTER_VALIDATE_INT);
 $website = filter_input(INPUT_GET, 'website', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 $params = [];
 
-function checkParam($paramName)
-{
-  $validParam = False;
-  if (isset($_GET["$paramName"]) && $_GET["$paramName"] != '') {
-    return true;
-  } else {
-    return False;
-  }
-}
-
-
-if (checkParam('valider') == True) {
-  if (checkParam(paramName: 'address')) {
+if (checkParam('valider') == true) {
+  if (checkParam('address')) {
     array_push($params, ['address', "$address"]);
     $dev = filterDevelopers($dev, 'address', $address);
   }
@@ -42,56 +39,53 @@ if (checkParam('valider') == True) {
   }
   $dev = filterDevelopers($dev, $params);
 }
-
-
 ?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?php echo htmlspecialchars($_SESSION['langue']); ?>">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style/main.css">
-  <title><?php echo $lang['MAINPAGE_TITLE']; ?></title>
+  <link rel="stylesheet" href="<?php echo BASE_URL; ?>../assets/css/main.css">
+  <title><?php echo htmlspecialchars($lang['NAV_DEV_TITLE']); ?></title>
 </head>
 
 <body>
   <header>
-    <?php require('header.php') ?>
+    <?php require_once __DIR__ . '/../include/header.php'; ?>
   </header>
 
   <main>
     <div class="slideshow-container">
       <div class="slideshow-title">
-        <h2><?php echo $lang['DEV_TITLE']; ?></h2>
+        <h2><?php echo htmlspecialchars($lang['DEV_TITLE']); ?></h2>
       </div>
       <div class="slideshow-content">
-        <img src="https://limeswood.ae/wp-content/uploads/2023/01/6.jpg" alt="">
+        <img src="https://limeswood.ae/wp-content/uploads/2023/01/6.jpg" alt="Slideshow Image 1">
       </div>
       <div class="slideshow-content">
-        <img src="https://limeswood.ae/wp-content/uploads/2023/01/5.jpg" alt="">
+        <img src="https://limeswood.ae/wp-content/uploads/2023/01/5.jpg" alt="Slideshow Image 2">
       </div>
       <div class="slideshow-content">
-        <img src="https://limeswood.ae/wp-content/uploads/2023/01/2.jpg" alt="">
+        <img src="https://limeswood.ae/wp-content/uploads/2023/01/2.jpg" alt="Slideshow Image 3">
       </div>
     </div>
     <section>
       <form class="lux-form" action="" method="GET">
-        <input type="text" name="langue" value="<?php echo ($_SESSION['langue']); ?>" hidden>
-        <input type="text" name="name" placeholder="Nom" value="<?php echo ($name); ?>">
-        <input type="date" name="regDate" value="<?php echo ($regDate); ?>">
+        <input type="text" name="langue" value="<?php echo htmlspecialchars($_SESSION['langue']); ?>" hidden>
+        <input type="text" name="name" placeholder="Nom" value="<?php echo htmlspecialchars($name); ?>">
+        <input type="date" name="regDate" value="<?php echo htmlspecialchars($regDate); ?>">
         <input type="number" name="licenseNum" step="1" placeholder="Numéro de licence"
-          value="<?php echo ($licenseNum); ?>">
-        <input type="text" name="website" placeholder="Website" value="<?php echo ($website); ?>">
+          value="<?php echo htmlspecialchars($licenseNum); ?>">
+        <input type="text" name="website" placeholder="Website" value="<?php echo htmlspecialchars($website); ?>">
 
         <input type="submit" name="valider" value="Envoyer">
         <input type="reset" value="Effacer les filtres" onclick="window.location.href=window.location.pathname;">
-
       </form>
       <table class="table">
         <tr>
           <th>Name</th>
-
           <th>Registration Date</th>
           <th>License number</th>
           <th>Website</th>

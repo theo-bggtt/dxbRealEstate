@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../db.php'; // Path to db.php in the root
+require_once __DIR__ . '/../include/config/db.php'; // Path to db.php in the root
 $pdo = getPDO(); // Use the centralized getPDO() function
 
 // Generate CSRF token if not set

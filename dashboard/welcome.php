@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../db.php'; // Path to db.php in the root
-$pdo = getPDO(); // Use the centralized getPDO() function
+require_once '../include/config/db.php';
+$pdo = getPDO();
 
 ?>
 

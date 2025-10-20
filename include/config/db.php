@@ -1,10 +1,10 @@
 <?php
-// db.php (place in your project root or a 'includes/' folder)
+// db.php (place in your project root or a 'includes/config/' folder)
 
-require_once __DIR__ . '/vendor/autoload.php'; // Adjust if vendor is elsewhere
+require_once __DIR__ . '/../../vendor/autoload.php';
 
 // Load .env with error handling
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ ); // Adjust to parent directory if .env is in include/
 try {
     $dotenv->load();
     $dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS', 'DB_CHARSET'])->notEmpty();
@@ -19,4 +19,8 @@ function getPDO() {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     return $pdo;
 }
+
+// Initialize global $pdo on include
+global $pdo;
+$pdo = getPDO();
 ?>
