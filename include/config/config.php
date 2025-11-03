@@ -1,4 +1,4 @@
 <?php
-define('BASE_URL', 'http://localhost/ubuntu-autosync/dxbRealEstate/public/'); // Public files
-define('DASHBOARD_URL', 'http://localhost/ubuntu-autosync/dxbRealEstate/dashboard/'); // Dashboard files
+define('BASE_URL', 'https://dxbrealestate.dontrug.fun/'); // Public base URL
+define('ASSETS_URL', 'https://dxbrealestate.dontrug.fun/assets/'); // Assets base URL
 ?>

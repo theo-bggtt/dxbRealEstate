@@ -10,6 +10,7 @@ $lang['THE_CONCEPT_TITLE'] = 'The Concept';
 $lang['SLIDESHOW_TITLE'] = 'The elegant way of comparing';
 $lang['THE_CONCEPT_TEXT'] = 'Discover Dubai’s real estate like never before. Our platform brings together every upcoming and ongoing project in one place, making it easy to explore, compare, and review developments across the city. From prices and handover dates to developer track records and community insights, you’ll find everything you need to make confident property decisions. <br><br>Think of it as the <b>“Tripadvisor for Dubai real estate”</b> a trusted guide where buyers, investors, and residents can share experiences, rate projects, and uncover the best opportunities in one of the world’s most exciting property markets.';
 $lang['DEV_TITLE'] = 'The developers';
+$lang['PROJECTS_TITLE'] = 'The projects';
 
 // Login Panel
 $lang['DASHBOARD_TITLE'] = 'Dashboard';
@@ -24,4 +25,21 @@ $lang['LOGIN_LOGIN_TITLE'] = 'Login';
 $lang['LOGIN_PLACEHOLDER_USERNAME'] = 'Username';
 $lang['LOGIN_PLACEHOLDER_PASSWORD'] = 'Password';
 $lang['LOGIN_PLACEHOLDER_PASSWORD_CONFIRM'] = 'Confirm Password';
+
+// Footer
+$lang['FOOTER_ABOUT_TITLE'] = 'About Us';
+$lang['FOOTER_ABOUT_TEXT'] = 'Your trusted platform for discovering and comparing real estate projects in Dubai. We connect investors, buyers, and residents with the best property opportunities in the city.';
+$lang['FOOTER_NAVIGATION_TITLE'] = 'Navigation';
+$lang['FOOTER_SERVICES_TITLE'] = 'Our Services';
+$lang['FOOTER_SERVICE_1'] = 'Project Comparison';
+$lang['FOOTER_SERVICE_2'] = 'Reviews & Ratings';
+$lang['FOOTER_SERVICE_3'] = 'Developer Tracking';
+$lang['FOOTER_SERVICE_4'] = 'Investment Advice';
+$lang['FOOTER_CONTACT_TITLE'] = 'Contact';
+$lang['FOOTER_ADDRESS'] = 'Dubai, United Arab Emirates';
+$lang['FOOTER_PHONE'] = '+971 4 XXX XXXX';
+$lang['FOOTER_EMAIL'] = 'info@dxbrealestate.com';
+$lang['FOOTER_COPYRIGHT'] = 'DxB Real Estate. All rights reserved.';
+$lang['FOOTER_PRIVACY'] = 'Privacy Policy';
+$lang['FOOTER_TERMS'] = 'Terms of Service';
 ?>

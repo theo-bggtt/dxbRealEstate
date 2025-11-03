@@ -11,6 +11,6 @@ if (ini_get("session.use_cookies")) {
 }
 session_unset();
 session_destroy();
-header("Location: dashboard.php");
+header("Location: ../");
 exit;
 ?>

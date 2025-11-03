@@ -1,0 +1,142 @@
+/* Login/Register Page Styles - Elegant and Luxurious Form */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap');
+
+.connexion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 120px); /* Account for header height */
+    padding: 2rem 1rem;
+    background: linear-gradient(135deg, #f4f7fa 0%, #e8ecef 100%);
+    box-sizing: border-box;
+}
+
+.connexion form {
+    width: 100%;
+    max-width: 420px;
+    background-color: #ffffff;
+    padding: 3rem 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.connexion form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #d4af37 0%, #bfa046 100%);
+}
+
+.connexion h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: #2c3e50;
+    margin: 0 0 2rem 0;
+    letter-spacing: 0.5px;
+}
+
+.error {
+    background-color: #fee;
+    color: #c0392b;
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 4px solid #e74c3c;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    background-color: #fdfdfd;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #bfa046;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(191, 160, 70, 0.2);
+}
+
+button[type="submit"] {
+    width: 100%;
+    margin-bottom: 1.5rem;
+}
+
+.switch {
+    color: #7f8c8d;
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.switch a {
+    color: #bfa046;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.switch a:hover {
+    color: #a98d38;
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .connexion {
+        min-height: calc(100vh - 100px);
+        padding: 1rem;
+    }
+
+    .connexion form {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem;
+    }
+
+    .connexion h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+        padding: 0.9rem;
+        margin-bottom: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .connexion form {
+        padding: 1.5rem 1rem;
+        margin: 0;
+    }
+
+    .connexion h1 {
+        font-size: 1.6rem;
+    }
+
+    .error {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+}

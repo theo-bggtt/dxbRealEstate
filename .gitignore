@@ -6,3 +6,4 @@ composer.lock
 composer.phar
 composer.json
 vendor/
+include/config/.env

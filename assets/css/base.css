@@ -1,0 +1,21 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fa;
+    overflow-x: hidden;;
+}
+
+a, h1, h2, h3, h4, p {
+    color: black;
+}
+
+main {
+    padding-top : 20px;
+    width: 90vw;
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
